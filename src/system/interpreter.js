@@ -164,7 +164,7 @@ BiwaScheme.Interpreter = BiwaScheme.Class.create({
 
   _execute: function(a, x, f, c, s){
     var ret = null;
-    //puts("executing "+x[0]);
+    //Console.puts("executing "+x[0]);
     
     while(true){ //x[0] != "halt"){
 
@@ -410,7 +410,7 @@ BiwaScheme.Interpreter = BiwaScheme.Class.create({
     if(after_evaluate) 
       this.after_evaluate = after_evaluate;
 
-    if(BiwaScheme.Debug) puts("executing: " + str);
+    if(BiwaScheme.Debug) Console.puts("executing: " + str);
      
     this.is_top = true;
     this.file_stack = [];
@@ -441,7 +441,7 @@ BiwaScheme.Interpreter = BiwaScheme.Class.create({
 
         // compile
         var opc = this.compiler.run(expr);
-        //if(BiwaScheme.Debug) p(opc);
+        //if(BiwaScheme.Debug) Console.p(opc);
 
         // execute
         ret = this.execute(expr, opc, 0, [], 0);
