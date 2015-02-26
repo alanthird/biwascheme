@@ -42,22 +42,9 @@ function Options(argv){
   opts.parser = parser;
 }
 
-function unbalanced_parentheses(text_code) {
-    var tokens = (new BiwaScheme.Parser(text_code)).tokens;
-    var parentheses = 0;
-    var brakets = 0;
-    for(var i=0; i<tokens.length; ++i) {
-        switch(tokens[i]) {
-            case "[": ++brakets; break;
-            case "]": --brakets; break;
-            case "(": ++parentheses; break;
-            case ")": --parentheses; break;
-        }
-    }
-    return parentheses != 0 || brakets != 0;
-}
-
 function repl(){
+  BiwaScheme.REPL.initialize();
+
   var rl = require('readline').createInterface(
     process.stdin,
     process.stdout
@@ -74,7 +61,7 @@ function repl(){
   rl.on('line', function(line) {
     code_to_evaluate += ' ' + line;
 
-    if (!unbalanced_parentheses(code_to_evaluate)) {
+    if (BiwaScheme.REPL.balanced_parentheses(code_to_evaluate)) {
       try{
         var result = BiwaScheme.run(code_to_evaluate);
       } catch (e) {
